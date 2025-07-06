@@ -7,13 +7,14 @@ const connection: ConnectionOptions = {
   port: env.REDISPORT,
   username: env.REDISUSER,
   password: env.REDISPASSWORD,
+  family: 0
 };
 
 export const createQueue = (name: string) => new Queue(name, { connection });
 
 export const setupQueueProcessor = async (queueName: string) => {
   const queueScheduler = new QueueScheduler(queueName, {
-    connection,
+    connection
   });
   await queueScheduler.waitUntilReady();
 
